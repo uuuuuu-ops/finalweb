@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        <!-- User Profile -->
+        <h2 class="text-center mb-4">User Dashboard</h2>
+        <div class="card mb-4 p-3">
+            <h4>Profile Details</h4>
+            <p><strong>Name:</strong> <%= name %></p>
+            <p><strong>Email:</strong> <%= email %></p>
+            <p><strong>Role:</strong> <%= role %></p>
+            <a href="/dashboard/edit" class="btn btn-warning">Edit Profile</a>
+        </div>
+  <!-- Link to Recipes Page -->
+        <div class="text-center mt-4">
+            <a href="/recipes" class="btn btn-primary">View My Recipes</a>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

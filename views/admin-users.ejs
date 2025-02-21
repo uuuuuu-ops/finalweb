@@ -1,0 +1,65 @@
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        <h2 class="text-center mb-4">User Management</h2>
+        
+        <!-- Search / Sorting Form -->
+        <form method="GET" action="/admin/users" class="d-flex mb-3">
+            <input type="text" name="search" placeholder="Search by name or email" value="<%- search || '' %>" class="form-control me-2" />
+            <select name="sortField" class="form-select me-2">
+                <option value="name" <%= sortField === 'name' ? 'selected' : '' %>>Name</option>
+                <option value="email" <%= sortField === 'email' ? 'selected' : '' %>>Email</option>
+            </select>
+            <select name="sortOrder" class="form-select me-2">
+                <option value="asc" <%= sortOrder === 'asc' ? 'selected' : '' %>>Ascending</option>
+                <option value="desc" <%= sortOrder === 'desc' ? 'selected' : '' %>>Descending</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+
+        <!-- Users Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(user => { %>
+                        <tr>
+                            <td><%= user.name %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.role %></td>
+                            <td>
+                                <a href="/admin/users/<%= user._id %>" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="/admin/users/delete/<%= user._id %>" method="POST" style="display:inline-block">
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav>
+            <ul class="pagination">
+                <% for(let i=1; i <= totalPages; i++) { %>
+                    <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                        <a class="page-link" href="/admin/users?search=<%= search %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&page=<%= i %>">
+                            <%= i %>
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

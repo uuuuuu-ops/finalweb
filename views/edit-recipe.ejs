@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        <h2 class="text-center mb-4">Edit Recipe</h2>
+        <form action="/recipes/edit/<%= recipe._id %>" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label>Title</label>
+                <input type="text" name="title" value="<%= recipe.title %>" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Ingredients</label>
+                <textarea name="ingredients" class="form-control" required><%= recipe.ingredients %></textarea>
+            </div>
+            <div class="mb-3">
+                <label>Instructions</label>
+                <textarea name="instructions" class="form-control" required><%= recipe.instructions %></textarea>
+            </div>
+            
+            <div class="mb-3">
+                <label>Current Image</label>
+                <% if (recipe.image) { %>
+                    <img src="<%= recipe.image %>" alt="Recipe Image" class="img-thumbnail" width="150">
+                <% } else { %>
+                    No image uploaded
+                <% } %>
+            </div>
+            <div class="mb-3">
+                <label>Upload New Image</label>
+                <input type="file" name="image" class="form-control" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Recipe</button>
+        </form>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

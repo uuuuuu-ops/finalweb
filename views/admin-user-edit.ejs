@@ -1,0 +1,34 @@
+<!-- views/admin-user-edit.ejs -->
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        <h2 class="text-center mb-4">Edit User: <%= user.name %></h2>
+
+        <form action="/admin/users/<%= user._id %>" method="POST">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Name</label>
+                <input type="text" name="name" value="<%= user.name %>" class="form-control shadow-sm" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Email</label>
+                <input type="email" name="email" value="<%= user.email %>" class="form-control shadow-sm" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Role</label>
+                <select name="role" class="form-select shadow-sm">
+                    <option value="regular" <%= user.role === 'regular' ? 'selected' : '' %>>Regular</option>
+                    <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Admin</option>
+                </select>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary shadow-sm">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

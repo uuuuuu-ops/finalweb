@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <!-- Add Recipe Form -->
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        <h2 class="text-center mb-4">Add New Recipe</h2>
+        <form action="/recipes/add" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label>Title</label>
+                <input type="text" name="title" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Ingredients</label>
+                <textarea name="ingredients" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label>Instructions</label>
+                <textarea name="instructions" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label>Image</label>
+                <input type="file" name="image" class="form-control" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-success">Add Recipe</button>
+        </form>
+    </div>
+
+    <!-- Display Recipes -->
+    <h2 class="text-center mt-5">Your Recipes</h2>
+    <div class="row">
+        <% recipes.forEach(recipe => { %>
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <% if (recipe.image) { %>
+                        <img src="<%= recipe.image %>" class="card-img-top" alt="Recipe Image">
+                    <% } %>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= recipe.title %></h5>
+                        <p><strong>Ingredients:</strong> <%= recipe.ingredients %></p>
+                        <p><strong>Instructions:</strong> <%= recipe.instructions %></p>
+                        <a href="/recipes/edit/<%= recipe._id %>" class="btn btn-primary">Edit</a>
+                        <form action="/recipes/delete/<%= recipe._id %>" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

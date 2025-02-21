@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        <h2 class="text-center mb-4">Register</h2>
+        
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-danger text-center"><%= error %></div>
+        <% } %>
+        
+        <form action="/register" method="POST">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Name</label>
+                <input type="text" name="name" value="<%= typeof name !== 'undefined' ? name : '' %>" class="form-control shadow-sm" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label fw-bold">Email</label>
+                <input type="email" name="email" value="<%= typeof email !== 'undefined' ? email : '' %>" class="form-control shadow-sm" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label fw-bold">Password</label>
+                <input type="password" name="password" class="form-control shadow-sm" required>
+            </div>
+            
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary shadow-sm">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
